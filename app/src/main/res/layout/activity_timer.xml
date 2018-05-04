@@ -25,9 +25,17 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/timerBtn"
-            android:layout_width="275dp"
-            android:layout_height="265dp"
+            android:id="@+id/batterBtn"
+            android:layout_width="265dp"
+            android:layout_height="275dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            app:srcCompat="@drawable/batterbtn" />
+
+        <ImageButton
+            android:id="@+id/pitchBtn"
+            android:layout_width="265dp"
+            android:layout_height="275dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/pitcherbtn" />
@@ -35,7 +43,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/swtchTeamBtn"
+        android:id="@+id/switchTeamBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SWITCH TEAMS"

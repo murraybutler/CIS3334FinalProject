@@ -9,6 +9,6 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center"
         android:src="@drawable/candlestick"
-        android:theme="@style/SplashTheme">
+        android:theme="@style/SplashTheme"/>
 
 </FrameLayout>
