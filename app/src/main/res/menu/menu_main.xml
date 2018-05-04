@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.css.a3334final.MainActivity">
+    <item
+        android:id="@+id/NewGame"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="100"
+        android:title="@string/new_game"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/ViewHistory"
+        android:icon="@android:drawable/ic_menu_save"
+        android:orderInCategory="100"
+        android:title="@string/view_history"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/EndGame"
+        android:orderInCategory="100"
+        android:title="@string/end_game"
+        app:showAsAction="never" />
+</menu>
