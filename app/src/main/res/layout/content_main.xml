@@ -22,6 +22,12 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
@@ -31,6 +37,12 @@
         android:textColor="@android:color/background_light"
         android:textSize="60sp"
         android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider" />
 
     <EditText
         android:id="@+id/visitTeamTxt"
@@ -43,11 +55,23 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider" />
+
     <TextView
         android:id="@+id/gameDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
+
+    <Spinner
+        android:id="@+id/distSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/darker_gray" />
 
     <Button
         android:id="@+id/startBtn"

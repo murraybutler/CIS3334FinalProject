@@ -11,6 +11,12 @@ public class Game implements Parcelable{
     private String visitTeam;
     private String gameDate;
 
+    public Game(String home, String visit, String day) {
+        homeTeam = home;
+        visitTeam = visit;
+        gameDate = day;
+    }
+
     public Game(Parcel inGame) {
         homeTeam = inGame.readString();
         visitTeam = inGame.readString();
@@ -39,4 +45,11 @@ public class Game implements Parcelable{
         }
     };
 
+    public String getHomeTeam() {
+        return homeTeam;
+    }
+
+    public String getVisitTeam() {
+        return visitTeam;
+    }
 }

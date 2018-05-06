@@ -7,11 +7,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,19 +25,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String gameDate = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(Calendar.getInstance().getTime());
-    public FirebaseDatabase pitchBase = FirebaseDatabase.getInstance();
-    public DatabaseReference pitchRef = pitchBase.getReference("Final2");
+    public String gDate = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(Calendar.getInstance().getTime());
     private Button gameStartBtn;
     private EditText homeTxt;
     private EditText visitTxt;
     private TextView gameDay;
-    Intent speedCall;
-
+    private double pdist  = 0;
+    private Spinner pspinner;
+    final private double[] pdistarr = {60.5,46,50,43};
+    // Intent speedCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +47,42 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        pspinner = (Spinner) findViewById(R.id.distSpinner);
         gameStartBtn = (Button) findViewById(R.id.startBtn);
         homeTxt = (EditText)findViewById(R.id.homeTeamTxt);
         visitTxt = (EditText)findViewById(R.id.visitTeamTxt);
         gameDay = (TextView)findViewById(R.id.gameDate);
 
-        gameDay.setText(gameDate);
+        ArrayAdapter<CharSequence> padapter = ArrayAdapter.createFromResource(this,R.array.distances,android.R.layout.simple_spinner_item);
+        padapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pspinner.setAdapter(padapter);
+
+        gameDay.setText(gDate);
 
         gameStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (homeTxt.toString().isEmpty() || visitTxt.toString().isEmpty()) {
+                if ((homeTxt.toString().isEmpty() || visitTxt.toString().isEmpty()) && pdist != 0) {
                     Toast.makeText(getApplicationContext(), R.string.incomplete_entry, Toast.LENGTH_LONG).show();
                 }else{
-                    Game curGame = new Game(homeTxt.toString(),visitTxt.toString(),gameDate);
-
-                    speedCall = Intent(this,timer.class);
+                    Game curGame = new Game(homeTxt.getText().toString(),visitTxt.getText().toString(),gDate);
+                    Intent speedCall = new Intent(getApplicationContext(),timer.class);
                     speedCall.putExtra("GAME_EXTRA",curGame);
+                    speedCall.putExtra("DISTANCE_EXTRA", pdist);
                     startActivity(speedCall);
                 }
+            }
+        });
+
+        pspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pdist = pdistarr[position];
+                Log.i("CIS3334", "pdist: " + pdist);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i("CIS3334","No distance selected");
             }
         });
     }

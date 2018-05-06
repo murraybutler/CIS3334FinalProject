@@ -12,6 +12,8 @@ public class timer extends AppCompatActivity {
 
     private long startTime;
     private long deltaTime;
+    private double pdist = 0.0;
+    private String curTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,10 @@ public class timer extends AppCompatActivity {
         final Button startBtn = (Button)findViewById(R.id.pitchBtn);
         final Button stopBtn = (Button)findViewById(R.id.batterBtn);
         final Button teamBtn = (Button)findViewById(R.id.switchTeamBtn);
-        TextView pitchTeam = (TextView)findViewById(R.id.timeTeamTxt);
+        final TextView pitchTeam = (TextView)findViewById(R.id.timeTeamTxt);
+
+        final Game tgame = (Game) getIntent().getParcelableExtra("GAME_EXTRA");
+        pdist = (double) getIntent().getDoubleExtra("DISTANCE_EXTRA",60.6);
 
         stopBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
@@ -40,9 +45,27 @@ public class timer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 deltaTime = SystemClock.uptimeMillis() - startTime;
-
+                double tspeed = calcSpeed(deltaTime);
+                Pitch tpitch = new Pitch(curTeam,tspeed);
             }
         });
+
+        teamBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pitchTeam.getText().toString() == tgame.getHomeTeam()) {
+                    curTeam = tgame.getVisitTeam();
+                } else {
+                    curTeam = tgame.getHomeTeam();
+                }
+                pitchTeam.setText(curTeam);
+            }
+        });
+    }
+
+    private double calcSpeed(long timey) {
+        double pspeed = ((pdist / (timey/1000.0)) * 0.68181818181);
+        return pspeed;
     }
 
 

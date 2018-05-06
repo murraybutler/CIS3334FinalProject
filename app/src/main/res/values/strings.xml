@@ -3,5 +3,11 @@
     <string name="new_game">New Game</string>
     <string name="end_game">End Game</string>
     <string name="view_history">View History</string>
+    <string-array name="distances">
+        <item>Major League</item>
+        <item>Little League</item>
+        <item>Fast Pitch</item>
+        <item>Slow Pitch</item>
+    </string-array>
     <string name="incomplete_entry">Incomplete entries, please enter all required fields</string>
 </resources>
