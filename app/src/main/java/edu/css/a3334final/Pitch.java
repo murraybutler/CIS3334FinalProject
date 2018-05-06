@@ -4,12 +4,12 @@ public class Pitch {
 
     private Game curgame;
     private String curteam;
-    private long curtimer;
+    private int curspeed;
 
-    public Pitch(Game game, String team, long timer) {
+    public Pitch(Game game, String team, int speed) {
         curgame = game;
         curteam = team;
-        curtimer = timer;
+        curspeed = speed;
     }
 
 

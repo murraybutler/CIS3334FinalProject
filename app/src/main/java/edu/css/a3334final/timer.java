@@ -18,9 +18,9 @@ public class timer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
 
-        Button startBtn = (Button)findViewById(R.id.pitchBtn);
+        final Button startBtn = (Button)findViewById(R.id.pitchBtn);
         final Button stopBtn = (Button)findViewById(R.id.batterBtn);
-        Button teamBtn = (Button)findViewById(R.id.switchTeamBtn);
+        final Button teamBtn = (Button)findViewById(R.id.switchTeamBtn);
         TextView pitchTeam = (TextView)findViewById(R.id.timeTeamTxt);
 
         stopBtn.setVisibility(View.GONE);
@@ -44,5 +44,7 @@ public class timer extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

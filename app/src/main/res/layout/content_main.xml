@@ -11,11 +11,16 @@
     tools:showIn="@layout/activity_main">
 
 
-    <TextView
+    <EditText
         android:id="@+id/homeTeamTxt"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="TextView" />
+        android:layout_height="80sp"
+        android:ems="10"
+        android:hint="Home"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView4"
@@ -27,11 +32,16 @@
         android:textSize="60sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/VisitorTeamTxt"
+    <EditText
+        android:id="@+id/visitTeamTxt"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="TextView" />
+        android:layout_height="80sp"
+        android:ems="10"
+        android:hint="Visitor"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/gameDate"

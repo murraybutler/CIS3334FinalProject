@@ -3,4 +3,5 @@
     <string name="new_game">New Game</string>
     <string name="end_game">End Game</string>
     <string name="view_history">View History</string>
+    <string name="incomplete_entry">Incomplete entries, please enter all required fields</string>
 </resources>

@@ -1,24 +1,42 @@
 package edu.css.a3334final;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Parcelable{
 
     private String homeTeam;
     private String visitTeam;
     private String gameDate;
 
-    public Game(String team1, String team2, String date) {
-        homeTeam = team1;
-        visitTeam = team2;
-        gameDate = date;
+    public Game(Parcel inGame) {
+        homeTeam = inGame.readString();
+        visitTeam = inGame.readString();
+        gameDate = inGame.readString();
     }
 
-    public ArrayList<String> getTeams() {
-        ArrayList<String> Teams;
-        Teams.add(homeTeam);
-        Teams.add(visitTeam);
-
-        return Teams;
+    @Override
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel destGame, int flags) {
+        destGame.writeString(homeTeam);
+        destGame.writeString(visitTeam);
+        destGame.writeString(gameDate);
+    }
+
+    public static final Parcelable.Creator<Game> CREATOR = new Parcelable.Creator<Game>() {
+        public Game createFromParcel(Parcel inGame) {
+            return new Game(inGame);
+        }
+
+        public Game[] newArray(int size) {
+            return new Game[size];
+        }
+    };
+
 }
