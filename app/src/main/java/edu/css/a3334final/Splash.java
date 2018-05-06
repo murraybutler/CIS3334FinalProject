@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance){
+        super.onCreate(savedInstance);
         startActivity(new Intent(Splash.this, MainActivity.class));
         finish();
     }

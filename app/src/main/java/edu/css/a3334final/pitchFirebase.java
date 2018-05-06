@@ -8,5 +8,5 @@ public class pitchFirebase {
     public FirebaseDatabase pitchBase = FirebaseDatabase.getInstance();
     public DatabaseReference pitchRef = pitchBase.getReference("Final2");
 
-    
+
 }

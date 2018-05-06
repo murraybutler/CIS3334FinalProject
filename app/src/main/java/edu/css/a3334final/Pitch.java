@@ -8,10 +8,10 @@ public class Pitch {
 
     private Game curgame;
     private String curteam;
-    private int curspeed;
+    private double curspeed;
     private String ptime;
 
-    public Pitch(String team, int speed) {
+    public Pitch(String team, double speed) {
         curteam = team;
         curspeed = speed;
         ptime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(Calendar.getInstance().getTime());;

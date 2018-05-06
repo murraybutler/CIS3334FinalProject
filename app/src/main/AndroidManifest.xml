@@ -29,8 +29,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Speed" />
-        <activity android:name=".timer" />
-        <activity android:name=".history"></activity>
+        <activity android:name=".Timer" />
+        <activity android:name=".History"></activity>
     </application>
 
 </manifest>
