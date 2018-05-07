@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText homeTxt;
     private EditText visitTxt;
     private TextView gameDay;
-    private double pdist  = 0;
+    private double pdist  = 0.0;
     private Spinner pspinner;
     final private double[] pdistarr = {60.5,46,50,43};
     pitchFirebase pitchFireSrc;
@@ -68,14 +68,15 @@ public class MainActivity extends AppCompatActivity {
         gameStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((homeTxt.toString().isEmpty() || visitTxt.toString().isEmpty()) && pdist != 0) {
+                if (homeTxt.toString().isEmpty() || visitTxt.toString().isEmpty() || pdist == 0.0) {
                     Toast.makeText(getApplicationContext(), R.string.incomplete_entry, Toast.LENGTH_LONG).show();
                 }else{
                     Game curGame = new Game(homeTxt.getText().toString(),visitTxt.getText().toString(),gDate);
                     Intent speedCall = new Intent(v.getContext(),Ptimer.class);
                     speedCall.putExtra("GAME_EXTRA",curGame);
                     speedCall.putExtra("DISTANCE_EXTRA", pdist);
-                    startActivityForResult(speedCall,1);
+                    //startActivityForResult(speedCall,1);
+                    startActivity(speedCall);
                 }
             }
         });
@@ -133,14 +134,16 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         switch (item.getItemId()) {
-            case R.id.NewGame:
+            /** case R.id.NewGame:
                 // database write to end game?
-                Intent nGame = new Intent(getApplicationContext(), MainActivity.class);
+                finish();
+                Intent nGame = new Intent(this, MainActivity.class);
                 startActivity(nGame);
-                return true;
+                return true; **/
 
             case R.id.ViewHistory:
-                Intent nHist = new Intent(getApplicationContext(), History.class);
+                finish();
+                Intent nHist = new Intent(this, History.class);
                 startActivity(nHist);
                 return true;
 

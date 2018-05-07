@@ -44,6 +44,7 @@ public class Ptimer extends AppCompatActivity {
 
         stopBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
+        pitchTeam.setText(tgame.getHomeTeam());
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,11 +112,6 @@ public class Ptimer extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.NewGame) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
