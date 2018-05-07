@@ -1,15 +1,20 @@
 package edu.css.a3334final;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
 
 public class Timer extends AppCompatActivity {
 
@@ -18,6 +23,8 @@ public class Timer extends AppCompatActivity {
     private long deltaTime;
     private double pdist = 0.0;
     private String curTeam;
+    private pitchFirebase pitchFireRef;
+    static final int RES_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,9 @@ public class Timer extends AppCompatActivity {
 
         final Game tgame = (Game) getIntent().getParcelableExtra("GAME_EXTRA");
         pdist = (double) getIntent().getDoubleExtra("DISTANCE_EXTRA",60.6);
+
+        pitchFireRef = new pitchFirebase();
+        pitchFireRef.open();
 
         stopBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
@@ -51,6 +61,13 @@ public class Timer extends AppCompatActivity {
                 deltaTime = SystemClock.uptimeMillis() - startTime;
                 double tspeed = calcSpeed(deltaTime);
                 Pitch tpitch = new Pitch(curTeam,tspeed);
+                pitchFireRef.createPitch(tpitch);
+                stopBtn.setVisibility(View.GONE);
+                startBtn.setVisibility(View.VISIBLE);
+                Intent speedInt = new Intent(getApplicationContext(),Speed.class);
+                speedInt.putExtra("SPEED_EXTRA",tspeed);
+                startActivityForResult(speedInt,RES_CODE);
+
             }
         });
 
@@ -70,6 +87,15 @@ public class Timer extends AppCompatActivity {
     private double calcSpeed(long timey) {
         double pspeed = ((pdist / (timey/1000.0)) * 0.68181818181);
         return pspeed;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_CANCELED){
+                Log.i("CIS3334", "Speed Activity returned");
+            }
+        }
     }
 
     @Override

@@ -1,7 +1,9 @@
 package edu.css.a3334final;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,6 +17,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private double pdist  = 0;
     private Spinner pspinner;
     final private double[] pdistarr = {60.5,46,50,43};
+    pitchFirebase pitchFireSrc;
+    DatabaseReference pitchRef;
     // Intent speedCall;
 
     @Override
@@ -38,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ActionBar myAB = getSupportActionBar();
+        if (myAB != null) {
+            myAB.setDisplayHomeAsUpEnabled(true);
+        }
 
         pspinner = (Spinner) findViewById(R.id.distSpinner);
         gameStartBtn = (Button) findViewById(R.id.startBtn);
@@ -61,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent speedCall = new Intent(getApplicationContext(),Timer.class);
                     speedCall.putExtra("GAME_EXTRA",curGame);
                     speedCall.putExtra("DISTANCE_EXTRA", pdist);
-                    startActivity(speedCall);
+                    startActivityForResult(speedCall,1);
                 }
             }
         });
@@ -77,6 +91,32 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("CIS3334","No distance selected");
             }
         });
+    }
+
+    private void setupPitchFirebase() {
+        pitchFireSrc = new pitchFirebase();
+        pitchRef = pitchFireSrc.open();
+
+        pitchRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_CANCELED){
+                Log.i("CIS3334", "Timer Activity returned");
+            }
+        }
     }
 
     @Override
