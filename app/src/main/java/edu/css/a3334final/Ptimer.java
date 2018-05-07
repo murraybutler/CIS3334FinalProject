@@ -111,9 +111,23 @@ public class Ptimer extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            /** case R.id.NewGame:
+             // database write to end game?
+             finish();
+             Intent nGame = new Intent(this, MainActivity.class);
+             startActivity(nGame);
+             return true; **/
 
-        return super.onOptionsItemSelected(item);
+            case R.id.ViewHistory:
+                finish();
+                Intent nHist = new Intent(this, History.class);
+                startActivity(nHist);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
