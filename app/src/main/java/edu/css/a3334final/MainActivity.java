@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.incomplete_entry, Toast.LENGTH_LONG).show();
                 }else{
                     Game curGame = new Game(homeTxt.getText().toString(),visitTxt.getText().toString(),gDate);
-                    Intent speedCall = new Intent(getApplicationContext(),Timer.class);
+                    Intent speedCall = new Intent(v.getContext(),Ptimer.class);
                     speedCall.putExtra("GAME_EXTRA",curGame);
                     speedCall.putExtra("DISTANCE_EXTRA", pdist);
                     startActivityForResult(speedCall,1);
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_CANCELED){
-                Log.i("CIS3334", "Timer Activity returned");
+                Log.i("CIS3334", "Ptimer Activity returned");
             }
         }
     }

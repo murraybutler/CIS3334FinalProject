@@ -28,21 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Speed" android:parentActivityName="MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
-        </activity>
-        <activity android:name=".Timer" android:parentActivityName="MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
-        </activity>
-        <activity android:name=".History" android:parentActivityName="MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
-        </activity>
+        <activity android:name=".Speed"></activity>
+        <activity android:name=".Ptimer"></activity>
+        <activity android:name=".History"></activity>
     </application>
 
 </manifest>

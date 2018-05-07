@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 
-public class Timer extends AppCompatActivity {
+public class Ptimer extends AppCompatActivity {
 
 
     private long startTime;
@@ -64,7 +64,7 @@ public class Timer extends AppCompatActivity {
                 pitchFireRef.createPitch(tpitch);
                 stopBtn.setVisibility(View.GONE);
                 startBtn.setVisibility(View.VISIBLE);
-                Intent speedInt = new Intent(getApplicationContext(),Speed.class);
+                Intent speedInt = new Intent(v.getContext(),Speed.class);
                 speedInt.putExtra("SPEED_EXTRA",tspeed);
                 startActivityForResult(speedInt,RES_CODE);
 

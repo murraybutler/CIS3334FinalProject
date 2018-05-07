@@ -7,7 +7,7 @@
     android:background="@drawable/candlestick2"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Timer">
+    tools:context=".Ptimer">
 
     <TextView
         android:id="@+id/timeTeamTxt"
