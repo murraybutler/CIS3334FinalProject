@@ -63,6 +63,7 @@ public class Ptimer extends AppCompatActivity {
                 double tspeed = calcSpeed(deltaTime);
                 Pitch tpitch = new Pitch(curTeam,tspeed);
                 pitchFireRef.createPitch(tpitch);
+                tgame.addPitch(tpitch);
                 stopBtn.setVisibility(View.GONE);
                 startBtn.setVisibility(View.VISIBLE);
                 Intent speedInt = new Intent(v.getContext(),Speed.class);

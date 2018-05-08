@@ -13,9 +13,9 @@ public class Pitch implements Serializable{
     private String ptime;
 
     public Pitch(String team, double speed) {
-        curteam = team;
-        curspeed = speed;
-        ptime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(Calendar.getInstance().getTime());;
+        this.curteam = team;
+        this.curspeed = speed;
+        this.ptime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(Calendar.getInstance().getTime());;
     }
 
     public String getTeam() {
@@ -44,7 +44,7 @@ public class Pitch implements Serializable{
 
     @Override
     public String toString() {
-        return "Pitch{" + "Team=" + curteam + ",Speed=" + Double.toString(curspeed) + ",Time=" + ptime;
+        return "Pitch{" + "Team=" + curteam + ",Speed=" + Double.toString(curspeed) + ",Time=" + ptime + "}";
     }
 
 }

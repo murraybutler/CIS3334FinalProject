@@ -10,6 +10,7 @@ public class Game implements Parcelable{
     private String homeTeam;
     private String visitTeam;
     private String gameDate;
+    private ArrayList<Pitch> pitches;
 
     public Game(String home, String visit, String day) {
         homeTeam = home;
@@ -51,5 +52,9 @@ public class Game implements Parcelable{
 
     public String getVisitTeam() {
         return visitTeam;
+    }
+
+    public void addPitch(Pitch pitch) {
+        pitches.add(pitch);
     }
 }
