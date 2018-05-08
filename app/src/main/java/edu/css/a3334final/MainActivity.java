@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         gameStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (homeTxt.toString().isEmpty() || visitTxt.toString().isEmpty() || pdist == 0.0) {
+                if (homeTxt.getText().toString().equals("") || visitTxt.getText().toString().equals("") || pdist == 0.0) {
                     Toast.makeText(getApplicationContext(), R.string.incomplete_entry, Toast.LENGTH_LONG).show();
                 }else{
                     Game curGame = new Game(homeTxt.getText().toString(),visitTxt.getText().toString(),gDate);

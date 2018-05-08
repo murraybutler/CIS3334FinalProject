@@ -12,10 +12,14 @@ public class Pitch implements Serializable{
     private double curspeed;
     private String ptime;
 
+    public Pitch() {
+
+    }
+
     public Pitch(String team, double speed) {
         this.curteam = team;
         this.curspeed = speed;
-        this.ptime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(Calendar.getInstance().getTime());;
+        this.ptime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().getTime());;
     }
 
     public String getTeam() {

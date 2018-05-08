@@ -55,6 +55,17 @@ public class Game implements Parcelable{
     }
 
     public void addPitch(Pitch pitch) {
-        pitches.add(pitch);
+        this.pitches.add(pitch);
+    }
+
+    @Override
+    public String toString() {
+        String retStr = "Game{" + this.gameDate + ":";
+
+        for (Pitch s : this.pitches) {
+            retStr += "{" + s.toString() + "}";
+        }
+
+        return retStr;
     }
 }

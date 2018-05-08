@@ -23,7 +23,8 @@ public class Ptimer extends AppCompatActivity {
     private long deltaTime;
     private double pdist = 0.0;
     private String curTeam;
-    private pitchFirebase pitchFireRef;
+    private pitchFirebase pitchFireDataSource;
+    private DatabaseReference pitchFireRef;
     static final int RES_CODE = 1;
 
     @Override
@@ -39,12 +40,13 @@ public class Ptimer extends AppCompatActivity {
         final Game tgame = (Game) getIntent().getParcelableExtra("GAME_EXTRA");
         pdist = (double) getIntent().getDoubleExtra("DISTANCE_EXTRA",60.6);
 
-        pitchFireRef = new pitchFirebase();
-        pitchFireRef.open();
+        pitchFireDataSource = new pitchFirebase();
+        pitchFireRef = pitchFireDataSource.open();
 
         stopBtn.setVisibility(View.GONE);
         startBtn.setVisibility(View.VISIBLE);
         pitchTeam.setText(tgame.getHomeTeam());
+        curTeam = tgame.getHomeTeam();
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +64,8 @@ public class Ptimer extends AppCompatActivity {
                 deltaTime = SystemClock.uptimeMillis() - startTime;
                 double tspeed = calcSpeed(deltaTime);
                 Pitch tpitch = new Pitch(curTeam,tspeed);
-                pitchFireRef.createPitch(tpitch);
-                tgame.addPitch(tpitch);
+                pitchFireDataSource.createPitch(tpitch);
+                //tgame.addPitch(tpitch);
                 stopBtn.setVisibility(View.GONE);
                 startBtn.setVisibility(View.VISIBLE);
                 Intent speedInt = new Intent(v.getContext(),Speed.class);
@@ -88,7 +90,7 @@ public class Ptimer extends AppCompatActivity {
 
     private double calcSpeed(long timey) {
         double pspeed = ((pdist / (timey/1000.0)) * 0.68181818181);
-        return pspeed;
+        return Math.floor(pspeed * 100) / 100;
     }
 
     @Override
