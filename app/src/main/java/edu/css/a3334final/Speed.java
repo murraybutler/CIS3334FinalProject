@@ -1,5 +1,11 @@
 package edu.css.a3334final;
 
+/**
+ * Speed display Activity class
+ * @author Murray Butler
+ * @version 1.0
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,6 +34,7 @@ public class Speed extends AppCompatActivity {
 
         setSpeedAndColor(spd, mph, speedBall);
 
+        // Listener for Click event on return button (Ptimer)
         rtnTmr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +46,12 @@ public class Speed extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to set and color text for display
+     * @param spdView TextView for speed val
+     * @param mphView TextView for "MPH" string
+     * @param speed double speed val to display
+     */
     private void setSpeedAndColor(TextView spdView, TextView mphView, double speed) {
         spdView.setText(Double.toString(speed));
         if (speed > 80) {

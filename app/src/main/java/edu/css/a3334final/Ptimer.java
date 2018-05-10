@@ -1,5 +1,11 @@
 package edu.css.a3334final;
 
+/**
+ * Pitch timer class for Activity
+ * @author Murray Butler
+ * @version 1.0
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.SystemClock;
@@ -19,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 public class Ptimer extends AppCompatActivity {
 
 
+    // Declarations and instantiations
     private long startTime;
     private long deltaTime;
     private double pdist = 0.0;
@@ -40,6 +47,7 @@ public class Ptimer extends AppCompatActivity {
         final Game tgame = (Game) getIntent().getParcelableExtra("GAME_EXTRA");
         pdist = (double) getIntent().getDoubleExtra("DISTANCE_EXTRA",60.6);
 
+        // Firebase ref
         pitchFireDataSource = new pitchFirebase();
         pitchFireRef = pitchFireDataSource.open();
 
@@ -48,6 +56,7 @@ public class Ptimer extends AppCompatActivity {
         pitchTeam.setText(tgame.getHomeTeam());
         curTeam = tgame.getHomeTeam();
 
+        // Listener for Click event on pitch button
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +67,7 @@ public class Ptimer extends AppCompatActivity {
             }
         });
 
+        // Listener for Click event on batter button
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +75,7 @@ public class Ptimer extends AppCompatActivity {
                 double tspeed = calcSpeed(deltaTime);
                 Pitch tpitch = new Pitch(curTeam,tspeed);
                 pitchFireDataSource.createPitch(tpitch);
-                //tgame.addPitch(tpitch);
+                //tgame.addPitch(tpitch);  Debating if this should be the structure for data or not.
                 stopBtn.setVisibility(View.GONE);
                 startBtn.setVisibility(View.VISIBLE);
                 Intent speedInt = new Intent(v.getContext(),Speed.class);
@@ -75,6 +85,7 @@ public class Ptimer extends AppCompatActivity {
             }
         });
 
+        // Listener for Click event on team switch button
         teamBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,11 +99,24 @@ public class Ptimer extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method for calculation of pitch speed
+     * @param timey long millisecond split time
+     * @return double speed to two decimal points
+     */
     private double calcSpeed(long timey) {
+        // divide distance from mound to plate by milliseconds times 3600 seconds(hour) divided by 5280 feet (mile)
         double pspeed = ((pdist / (timey/1000.0)) * 0.68181818181);
+        // And reduce to two decimal places
         return Math.floor(pspeed * 100) / 100;
     }
 
+    /**
+     * Override method of return from Intent call
+     * @param requestCode "1"
+     * @param resultCode "1"
+     * @param data Intent Bundle for return to caller
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -102,6 +126,11 @@ public class Ptimer extends AppCompatActivity {
         }
     }
 
+    /**
+     * Override method for App Bar menu.
+     * @param menu menu item
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -109,19 +138,17 @@ public class Ptimer extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * optins selection method for app bar menu.
+     * @param item menu item
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            /** case R.id.NewGame:
-             // database write to end game?
-             finish();
-             Intent nGame = new Intent(this, MainActivity.class);
-             startActivity(nGame);
-             return true; **/
-
+        switch (item.getItemId()) { //Possibly more cases with other activities??
             case R.id.ViewHistory:
                 finish();
                 Intent nHist = new Intent(this, History.class);

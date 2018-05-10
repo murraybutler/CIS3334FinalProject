@@ -1,5 +1,11 @@
 package edu.css.a3334final;
 
+/**
+ * MainActivity for app
+ * @author Murray Butler
+ * @version 1.0
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +35,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Declarations and instantiations
+     */
     public String gDate = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(Calendar.getInstance().getTime());
     private Button gameStartBtn;
     private EditText homeTxt;
@@ -39,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     final private double[] pdistarr = {60.5,46,50,43};
     pitchFirebase pitchFireSrc;
     DatabaseReference pitchRef;
-    // Intent speedCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +56,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar myAB = getSupportActionBar();
-        if (myAB != null) {
-            myAB.setDisplayHomeAsUpEnabled(true);
-        }
-
         pspinner = (Spinner) findViewById(R.id.distSpinner);
         gameStartBtn = (Button) findViewById(R.id.startBtn);
         homeTxt = (EditText)findViewById(R.id.homeTeamTxt);
         visitTxt = (EditText)findViewById(R.id.visitTeamTxt);
         gameDay = (TextView)findViewById(R.id.gameDate);
 
+        // Array Adapter for spinner
         ArrayAdapter<CharSequence> padapter = ArrayAdapter.createFromResource(this,R.array.distances,android.R.layout.simple_spinner_item);
         padapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pspinner.setAdapter(padapter);
 
         gameDay.setText(gDate);
 
+        /**
+         * Listener for Start Game button
+         */
         gameStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,51 +82,33 @@ public class MainActivity extends AppCompatActivity {
                     Intent speedCall = new Intent(v.getContext(),Ptimer.class);
                     speedCall.putExtra("GAME_EXTRA",curGame);
                     speedCall.putExtra("DISTANCE_EXTRA", pdist);
-                    //startActivityForResult(speedCall,1);
                     startActivity(speedCall);
                 }
             }
         });
 
+        /**
+         * Listener for distance spinner
+         */
         pspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 pdist = pdistarr[position];
-                Log.i("CIS3334", "pdist: " + pdist);
+                //Log.i("CIS3334", "pdist: " + pdist);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), R.string.incomplete_entry, Toast.LENGTH_LONG).show();
                 Log.i("CIS3334","No distance selected");
             }
         });
     }
 
-    private void setupPitchFirebase() {
-        pitchFireSrc = new pitchFirebase();
-        pitchRef = pitchFireSrc.open();
-
-        pitchRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_CANCELED){
-                Log.i("CIS3334", "Ptimer Activity returned");
-            }
-        }
-    }
-
+    /**
+     * Inflater for app bar menu
+     * @param menu menu resource
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -127,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handler for selected item in menu
+     * @param item resource id
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

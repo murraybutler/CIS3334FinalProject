@@ -1,5 +1,11 @@
 package edu.css.a3334final;
 
+/**
+ * Class to handle pitch objects for use in Views
+ * @author Murray Butler
+ * @version 1.0
+ */
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -24,6 +30,13 @@ public class pitchAdapter extends ArrayAdapter<Pitch>{
         this.pitchList = pitchIn;
     }
 
+    /**
+     * getting view to handle display of list
+     * @param position int list index
+     * @param convertView View context for caller
+     * @param parent group view context of parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Pitch pitch = pitchList.get(position);
